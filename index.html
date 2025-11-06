@@ -173,6 +173,34 @@
     .lesson.expanded{ background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.12)); border-left-color:var(--green); }
     .lesson .chev{ margin-left:auto; color:var(--muted); }
 
+    /* Testimonials */
+    .testimonials{
+      margin-top:28px;
+      background:rgba(255,255,255,0.02);
+      padding:18px;
+      border-radius:var(--radius);
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+    .testimonial{
+      background:rgba(0,0,0,0.18);
+      padding:12px;
+      border-radius:8px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:center;
+    }
+    .testimonial video{
+      width:100%;
+      height:150px;
+      border-radius:8px;
+      background:#000;
+      object-fit:cover;
+    }
+    .testimonial .t-caption{ color:var(--muted); font-size:14px; text-align:center; }
+
     /* modal */
     .modal{
       position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
@@ -192,20 +220,17 @@
     }
 
     /* responsive */
-    @media (max-width:900px){
+    @media (max-width:1100px){
+      .testimonials{ grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width:700px){
       .hero{ padding:40px 4%; min-height:220px; }
       h1{ font-size:22px; }
       .content{ padding:20px 4%; }
       .right-column{ width:100%; order:3; }
       .left-column{ order:2; }
       .authors{ margin-bottom:16px; }
-    }
-    @media (max-width:640px){
-      .header{ padding:12px; }
-      .brand{ font-size:15px; }
-      .hero{ padding:28px 3%; gap:18px; }
-      .badge{ font-size:12px; padding:6px 8px; }
-      .btn{ padding:10px 16px; font-size:14px; }
+      .testimonials{ grid-template-columns:1fr; }
     }
   </style>
 </head>
@@ -321,7 +346,6 @@
             <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
-
       </section>
 
       <section class="lessons" aria-labelledby="leccionesTitle">
@@ -331,8 +355,8 @@
           <div class="lesson" data-index="1">
             <div class="lesson-number">1</div>
             <div style="flex:1">
-              <div class="lesson-title">Introducción al Benchmark Exam</div>
-              <div class="lesson-desc">Conoce la estructura, niveles y objetivos del examen, junto con consejos iniciales para tu preparación.</div>
+              <div class="lesson-title">Certificación Internacional en Segunda Lengua</div>
+              <div class="lesson-desc">Introducción a los procesos de certificación y requisitos más comunes en exámenes internacionales.</div>
             </div>
             <div class="chev">▾</div>
           </div>
@@ -392,6 +416,27 @@
           </div>
         </div>
       </section>
+
+      <!-- NEW: Testimonios -->
+      <section class="testimonials" aria-labelledby="testimoniosTitle">
+        <h3 id="testimoniosTitle" style="grid-column:1/-1; margin:0 0 6px 0;">Testimonios</h3>
+
+        <div class="testimonial">
+          <video controls preload="metadata" src="assets/videos/Testimonio1.mp4"></video>
+          <div class="t-caption"><strong>Testimonio 1</strong><br><small class="t-muted">Alumno del MOOC</small></div>
+        </div>
+
+        <div class="testimonial">
+          <video controls preload="metadata" src="assets/videos/Testimonio2.mp4"></video>
+          <div class="t-caption"><strong>Testimonio 2</strong><br><small class="t-muted">Estudiante participante</small></div>
+        </div>
+
+        <div class="testimonial">
+          <video controls preload="metadata" src="assets/videos/Testimonio3.mp4"></video>
+          <div class="t-caption"><strong>Testimonio 3</strong><br><small class="t-muted">Graduado del curso</small></div>
+        </div>
+      </section>
+
     </div>
 
     <aside class="right-column">
@@ -440,13 +485,13 @@
   </div>
 
   <script>
-    /* === CONFIG: cambia VIDEO_URL por la URL pública (raw) de tu archivo en GitHub ===
-       Ejemplo: https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/mooc-benchmark-exam.mp4
-       Si tu archivo tiene espacios, codifícalos como %20 o renómbralo sin espacios.
+    /* === CONFIG: cambia VIDEO_URL por la URL pública (raw) de tu archivo en GitHub si lo prefieres ===
+       Ejemplo raw URL: https://raw.githubusercontent.com/sebastianparramoreno66-source/Benchmark-TAC-Practice/main/MOOC%20BENCHMARK%20EXAM.mp4
+       Para testimonios la página usa rutas relativas: assets/videos/Testimonio1.mp4 etc.
     */
     const VIDEO_URL = "https://raw.githubusercontent.com/sebastianparramoreno66-source/Benchmark-TAC-Practice/main/MOOC%20BENCHMARK%20EXAM.mp4";
 
-    // Modal open/close
+    // Modal open/close for intro video
     const modal = document.getElementById('modal');
     const openIntro = document.getElementById('openIntro');
     const closeModal = document.getElementById('closeModal');
@@ -454,20 +499,15 @@
     const videoSource = document.getElementById('videoSource');
 
     openIntro.addEventListener('click', () => {
-      // set video src
       videoSource.src = VIDEO_URL;
       introVideo.load();
-      // show modal
       modal.classList.add('open');
       modal.setAttribute('aria-hidden','false');
-      // try to play (autoplay may be blocked by browser; user can press play)
       introVideo.play().catch(()=>{ /* autoplay blocked */ });
     });
 
     closeModal.addEventListener('click', closeVideo);
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) closeVideo();
-    });
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeVideo(); });
 
     function closeVideo(){
       introVideo.pause();
@@ -482,7 +522,6 @@
     document.querySelectorAll('.lesson').forEach(item=>{
       item.addEventListener('click', ()=>{
         const isExpanded = item.classList.contains('expanded');
-        // close all
         document.querySelectorAll('.lesson').forEach(l => l.classList.remove('expanded'));
         if(!isExpanded){
           item.classList.add('expanded');
@@ -498,6 +537,7 @@
   </script>
 </body>
 </html>
+
 
 
 
