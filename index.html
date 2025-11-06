@@ -12,7 +12,6 @@
       --card:#191d22;
       --green:#00723f; /* color universidad */
       --white:#eef2f3;
-      --accent:#0f3b2a;
       --radius:12px;
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
@@ -122,10 +121,14 @@
     .avatar{
       width:72px;height:72px;border-radius:50%;
       flex-shrink:0;
-      background-size:cover;
-      background-position:center;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000;
       border:3px solid rgba(255,255,255,0.04);
     }
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
     .author h4{ margin:0; font-size:16px; }
     .author .role{ color:var(--muted); font-size:13px; margin-bottom:6px; }
     .author p{ margin:0; color:var(--muted); font-size:14px; }
@@ -244,66 +247,81 @@
       <section class="authors" aria-labelledby="autoresTitle">
         <h3 id="autoresTitle" style="margin:0 0 12px 0;">Autores</h3>
 
-        <!-- 5 autores con la misma descripción -->
+        <!-- Juan David Riaño -->
         <div class="author">
-          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=11')" aria-hidden="true"></div>
+          <div class="avatar" aria-hidden="true">
+            <img src="assets/images/Juanr.png" alt="Juan David Riaño">
+          </div>
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
             </div>
             <h4>Juan David Riaño</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
+        <!-- María Paula Genes -->
         <div class="author">
-          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=13')" aria-hidden="true"></div>
+          <div class="avatar" aria-hidden="true">
+            <img src="assets/images/PaulaG.png" alt="María Paula Genes">
+          </div>
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
             </div>
             <h4>María Paula Genes</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
+        <!-- Ana María Roa -->
         <div class="author">
-          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=19')" aria-hidden="true"></div>
+          <div class="avatar" aria-hidden="true">
+            <img src="assets/images/Anar.png" alt="Ana María Roa">
+          </div>
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
             </div>
             <h4>Ana María Roa</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
+        <!-- María Camila Velásquez -->
         <div class="author">
-          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=21')" aria-hidden="true"></div>
+          <div class="avatar" aria-hidden="true">
+            <img src="assets/images/CamilaV.png" alt="María Camila Velásquez">
+          </div>
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
             </div>
             <h4>María Camila Velásquez</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
+        <!-- Sebastián Parra -->
         <div class="author">
-          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=27')" aria-hidden="true"></div>
+          <div class="avatar" aria-hidden="true">
+            <img src="assets/images/Sebastianp.png" alt="Sebastián Parra">
+          </div>
           <div>
             <div style="display:flex; align-items:center; gap:8px;">
               <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
             </div>
             <h4>Sebastián Parra</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
+
       </section>
 
       <section class="lessons" aria-labelledby="leccionesTitle">
@@ -380,7 +398,6 @@
       <div class="card" aria-labelledby="objetivosTitle">
         <h3 id="objetivosTitle">Objetivos del curso</h3>
 
-        <!-- Objetivos actualizados -->
         <div class="objective">
           <strong>Fortalecer competencias lingüísticas</strong>
           <div style="margin-top:6px; color:var(--muted); font-size:14px;">
@@ -424,7 +441,7 @@
 
   <script>
     /* === CONFIG: cambia VIDEO_URL por la URL pública (raw) de tu archivo en GitHub ===
-       Ejemplo: https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/MOOC%20BENCHMARK%20EXAM.mp4
+       Ejemplo: https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/mooc-benchmark-exam.mp4
        Si tu archivo tiene espacios, codifícalos como %20 o renómbralo sin espacios.
     */
     const VIDEO_URL = "https://raw.githubusercontent.com/sebastianparramoreno66-source/Benchmark-TAC-Practice/main/MOOC%20BENCHMARK%20EXAM.mp4";
@@ -444,7 +461,7 @@
       modal.classList.add('open');
       modal.setAttribute('aria-hidden','false');
       // try to play (autoplay may be blocked by browser; user can press play)
-      introVideo.play().catch(()=>{ /* autoplay blocked: user interacts */ });
+      introVideo.play().catch(()=>{ /* autoplay blocked */ });
     });
 
     closeModal.addEventListener('click', closeVideo);
@@ -469,13 +486,12 @@
         document.querySelectorAll('.lesson').forEach(l => l.classList.remove('expanded'));
         if(!isExpanded){
           item.classList.add('expanded');
-          // optionally scroll into view
           item.scrollIntoView({behavior:'smooth', block:'nearest'});
         }
       });
     });
 
-    // Accessibility: Esc to close modal
+    // Esc to close modal
     document.addEventListener('keydown', (e) => {
       if(e.key === 'Escape' && modal.classList.contains('open')) closeVideo();
     });
