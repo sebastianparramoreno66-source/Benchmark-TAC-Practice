@@ -6,110 +6,73 @@
   <title>Benchmark Master – Universidad El Bosque</title>
   <style>
     :root{
-      --bg:#0d1114;
+      --green:#00723f;
+      --bg-gradient: linear-gradient(180deg,#071018 0%, #0d1114 100%);
       --panel:#0f1720;
       --muted:#98a0a6;
       --card:#191d22;
-      --green:#00723f; /* color universidad */
       --white:#eef2f3;
       --radius:12px;
+      --shadow: 0 6px 18px rgba(0,0,0,0.45);
       font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      background:linear-gradient(180deg,#071018 0%, #0d1114 100%);
-      color:var(--white);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-    }
 
-    /* Header / Hero */
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; margin:0; background:var(--bg-gradient); color:var(--white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+    /* Header */
     .header{
-      padding:18px 28px;
       display:flex;
       align-items:center;
       justify-content:space-between;
+      padding:18px 28px;
       background: linear-gradient(90deg,var(--panel), rgba(0,0,0,0));
       border-bottom:1px solid rgba(255,255,255,0.02);
     }
-    .brand{
-      font-weight:700;
-      letter-spacing:0.2px;
-      font-size:18px;
-    }
+    .brand{ font-weight:700; font-size:18px; }
     .invite{ color:var(--muted); font-size:14px; }
 
+    /* Hero */
     .hero{
+      padding:56px 6%;
       display:flex;
-      gap:40px;
       align-items:center;
-      padding:64px 6%;
-      min-height:320px;
-      background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(''); /* optional background image */
-      background-size:cover;
-      background-position:center;
+      gap:32px;
+      min-height:300px;
     }
-    .hero-left{
-      flex:1 1 600px;
-      max-width:900px;
-    }
-    .badges{ display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
-    .badge{
-      background:rgba(255,255,255,0.03);
-      color:var(--muted);
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:13px;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-    }
-    h1{ margin:0 0 12px 0; font-size:28px; letter-spacing:0.2px; }
-    .lead{ color:var(--muted); max-width:760px; margin-bottom:22px; }
+    .badges{ display:flex; gap:12px; margin-bottom:14px; flex-wrap:wrap; }
+    .badge{ background:rgba(255,255,255,0.03); color:var(--muted); padding:8px 12px; border-radius:999px; font-size:13px; }
+
+    h1{ margin:0 0 12px 0; font-size:28px; }
+    .lead{ margin:0 0 20px 0; color:var(--muted); max-width:780px; line-height:1.45; }
 
     .hero-actions{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
     .btn{
-      padding:12px 22px;
-      border-radius:999px;
-      border:2px solid transparent;
-      cursor:pointer;
-      font-weight:600;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color:var(--white);
       background:var(--green);
-      transition:transform .12s ease, box-shadow .12s;
-      box-shadow:0 6px 18px rgba(0,0,0,0.4);
+      color:#fff;
+      border:0;
+      padding:12px 20px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      box-shadow:var(--shadow);
     }
-    .btn.outline{
-      background:transparent;
-      border:2px solid rgba(255,255,255,0.12);
-      color:var(--white);
-    }
-    .btn:active{ transform:translateY(1px); }
+    .btn.outline{ background:transparent; border:2px solid rgba(255,255,255,0.12); }
 
-    /* Main content two columns */
-    .content{
-      display:flex;
-      gap:32px;
-      padding:40px 6%;
-      align-items:flex-start;
-      flex-wrap:wrap;
-    }
+    /* Layout */
+    .content{ display:flex; gap:32px; padding:36px 6%; align-items:flex-start; flex-wrap:wrap; }
     .left-column{ flex:1 1 640px; min-width:300px; }
-    .right-column{ width:320px; max-width:40%; min-width:260px; }
+    .right-column{ width:320px; min-width:260px; }
+
+    /* Card */
+    .card{ background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px; border-radius:12px; box-shadow: var(--shadow); }
 
     /* Authors */
-    .authors{
-      background:rgba(255,255,255,0.02);
-      padding:22px;
-      border-radius:var(--radius);
-      margin-bottom:20px;
-    }
+    .authors{ margin-bottom:20px; }
     .author{
       display:flex;
       gap:16px;
@@ -117,103 +80,108 @@
       padding:12px 0;
       border-bottom:1px dashed rgba(255,255,255,0.03);
     }
-    .author:last-child{ border-bottom:0; padding-bottom:0; }
-    .avatar{
-      width:72px;height:72px;border-radius:50%;
-      flex-shrink:0;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#000;
-      border:3px solid rgba(255,255,255,0.04);
-    }
+    .author:last-child{ border-bottom:0; }
+    .avatar{ width:72px; height:72px; border-radius:50%; overflow:hidden; flex-shrink:0; border:3px solid rgba(255,255,255,0.04); background:#000; display:flex; align-items:center; justify-content:center; }
     .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
     .author h4{ margin:0; font-size:16px; }
-    .author .role{ color:var(--muted); font-size:13px; margin-bottom:6px; }
+    .role{ color:var(--muted); font-size:13px; margin-bottom:6px; }
     .author p{ margin:0; color:var(--muted); font-size:14px; }
 
-    /* Objectives card */
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:18px;
-      border-radius:12px;
-    }
-    .card h3{ margin:0 0 12px 0; font-size:18px; }
-    .objective{ padding:12px; background:rgba(0,0,0,0.2); border-radius:8px; margin-bottom:10px; color:var(--muted); }
-    .objective:last-child{ margin-bottom:0; }
+    /* Objectives */
+    .objective{ padding:12px; background:rgba(0,0,0,0.18); border-radius:8px; margin-bottom:12px; color:var(--muted); }
 
-    /* Lessons accordion */
-    .lessons{
-      margin-top:22px;
+    /* Lessons */
+    .lessons{ margin-top:22px; border-radius:var(--radius); padding:18px; background:rgba(255,255,255,0.02); }
+    .lesson{ display:flex; gap:16px; align-items:flex-start; padding:12px; border-radius:8px; cursor:pointer; transition:background .12s; margin-bottom:10px; border-left:4px solid transparent; }
+    .lesson:hover{ background:rgba(255,255,255,0.01); }
+    .lesson-number{ min-width:36px; font-weight:700; color:var(--muted); display:flex; align-items:center; justify-content:center; }
+    .lesson-title{ font-weight:700; color:var(--white); }
+    .lesson-desc{ color:var(--muted); margin-top:6px; font-size:13px; }
+    .lesson.expanded{ border-left-color:var(--green); background:linear-gradient(90deg, rgba(0,0,0,0.22), rgba(0,0,0,0.12)); }
+
+    /* Testimonials (vertical videos) */
+    .testimonials{
+      margin-top:28px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
       background:rgba(255,255,255,0.02);
       padding:18px;
       border-radius:var(--radius);
     }
-    .lesson{
-      border-left:4px solid transparent;
-      padding:14px 16px;
-      display:flex;
-      align-items:flex-start;
-      gap:16px;
-      cursor:pointer;
-      transition:background .12s;
+    .testimonial{
+      padding:12px;
       border-radius:8px;
-      margin-bottom:10px;
+      background:rgba(0,0,0,0.18);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-start;
     }
-    .lesson:hover{ background:rgba(255,255,255,0.01); }
-    .lesson-number{
-      min-width:36px; font-weight:700; color:var(--muted); opacity:0.9;
-      display:flex; align-items:center; justify-content:center;
-      font-size:14px;
+    /* Specific: testimonials are vertical; show whole video without cropping */
+    .testimonial video{
+      width: auto;
+      max-width: 100%;
+      height: 320px;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius:8px;
+      background:#000;
+      display:block;
     }
-    .lesson-title{ font-weight:700; font-size:15px; color:var(--white); }
-    .lesson-desc{ color:var(--muted); font-size:13px; margin-top:6px; }
+    .t-caption{ color:var(--muted); text-align:center; font-size:14px; }
 
-    .lesson.expanded{ background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.12)); border-left-color:var(--green); }
-    .lesson .chev{ margin-left:auto; color:var(--muted); }
+    /* Modal: use very specific selectors so it won't be affected by other video rules */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,0.75);
+      padding:20px;
+      z-index:99999;
+      visibility:hidden;
+      opacity:0;
+      transition:opacity .18s ease, visibility .18s;
+    }
+    .modal.open{ visibility:visible; opacity:1; }
+    .modal .dialog{
+      width:100%;
+      max-width:1000px;
+      background:var(--card);
+      border-radius:12px;
+      padding:12px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+      margin:0 12px;
+    }
+    /* Intro video (horizontal) — keep it full inside the modal and do not crop */
+    .modal video,
+    #introVideo{
+      width:100%;
+      height:auto;
+      max-height:80vh;
+      object-fit:contain;
+      border-radius:8px;
+      background:#000;
+      display:block;
+    }
+    .modal .close{ background:transparent; border:0; color:var(--muted); font-size:18px; cursor:pointer; }
 
-    /* Testimonials */
-    .testimonials { gap:16px; }
-.testimonial {
-  background:rgba(0,0,0,0.18);
-  padding:12px;
-  border-radius:8px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  align-items:center;
-  justify-content:center;
-}
+    /* Ensure no global 'video { width:100% }' rules exist to avoid conflicts */
 
-/* Ajuste para videos verticales: quepan enteros sin recortarse */
-.testimonial video {
-  width: auto;               /* dejar que el ancho se ajuste según la altura */
-  max-width: 100%;           /* nunca más ancho que su contenedor */
-  height: 320px;             /* altura visual deseada (ajústala) */
-  max-height: 70vh;          /* no superar el 70% de la altura de la ventana */
-  object-fit: contain;       /* importante: mostrar todo el video sin recortar */
-  border-radius:8px;
-  background:#000;           /* barras negras alrededor si es necesario */
-  display:block;
-  margin: 0 auto;
-}
-
-/* Opcional: usar aspecto vertical fijo si todos los testimonios son verticales (9/16) */
-@media (min-width:700px){
-  .testimonial video {
-    aspect-ratio: 9 / 16;    /* fuerza la proporción vertical en navegadores modernos */
-    height: 360px;           /* ajustar altura para escritorio */
-    width: auto;
-  }
-}
-
-/* Ajustes responsive para móviles */
-@media (max-width:700px){
-  .testimonial video {
-    height: 50vh;            /* más alto en pantalla pequeña para mejor visibilidad */
-    max-height: 60vh;
-  }
+    /* Responsive */
+    @media (max-width:1100px){ .testimonials{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:700px){
+      .hero{ padding:36px 4%; min-height:220px; }
+      h1{ font-size:22px; }
+      .content{ padding:20px 4%; }
+      .testimonials{ grid-template-columns:1fr; }
+      .testimonial video{ height: 50vh; max-height:60vh; }
+      .right-column{ width:100%; order:3; }
+      .left-column{ order:2; }
+    }
   </style>
 </head>
 <body>
@@ -230,7 +198,6 @@
         <div class="badge">🎓 Certificado cursado</div>
       </div>
 
-      <!-- Título y descripción actualizados -->
       <h1>Benchmark Master: MOOC de preparación para el Benchmark Exam de Pearson</h1>
       <p class="lead">
         El MOOC Benchmark Master de la Universidad El Bosque te acompaña en tu proceso de preparación para el Benchmark Exam de Pearson, fortaleciendo tus habilidades en inglés y tu confianza al momento de presentar la prueba.
@@ -238,185 +205,103 @@
       </p>
 
       <div class="hero-actions">
-        <button id="openIntro" class="btn outline" aria-haspopup="dialog" title="Ver introducción">
-          ▶ VER INTRODUCCIÓN
-        </button>
-
-        <a class="btn" href="https://view.genially.com/690428e18e8921ab6fc039c0/interactive-content-benchmark-master" target="_blank" rel="noopener noreferrer">
-          ENTRAR AL CURSO
-        </a>
+        <button id="openIntro" class="btn outline" aria-haspopup="dialog" title="Ver introducción">▶ VER INTRODUCCIÓN</button>
+        <a class="btn" href="https://view.genially.com/690428e18e8921ab6fc039c0/interactive-content-benchmark-master" target="_blank" rel="noopener noreferrer">ENTRAR AL CURSO</a>
       </div>
     </div>
   </section>
 
-  <main class="content">
+  <main class="content" role="main">
     <div class="left-column">
-      <section class="authors" aria-labelledby="autoresTitle">
+      <!-- Authors -->
+      <section class="authors card" aria-labelledby="autoresTitle">
         <h3 id="autoresTitle" style="margin:0 0 12px 0;">Autores</h3>
 
-        <!-- Juan David Riaño -->
         <div class="author">
-          <div class="avatar" aria-hidden="true">
-            <img src="assets/images/Juanr.png" alt="Juan David Riaño">
-          </div>
+          <div class="avatar"><img src="assets/images/Juanr.png" alt="Juan David Riaño"></div>
           <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
-            </div>
             <h4>Juan David Riaño</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
-        <!-- María Paula Genes -->
         <div class="author">
-          <div class="avatar" aria-hidden="true">
-            <img src="assets/images/PaulaG.png" alt="María Paula Genes">
-          </div>
+          <div class="avatar"><img src="assets/images/PaulaG.png" alt="María Paula Genes"></div>
           <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
-            </div>
             <h4>María Paula Genes</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
-        <!-- Ana María Roa -->
         <div class="author">
-          <div class="avatar" aria-hidden="true">
-            <img src="assets/images/Anar.png" alt="Ana María Roa">
-          </div>
+          <div class="avatar"><img src="assets/images/Anar.png" alt="Ana María Roa"></div>
           <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
-            </div>
             <h4>Ana María Roa</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
-        <!-- María Camila Velásquez -->
         <div class="author">
-          <div class="avatar" aria-hidden="true">
-            <img src="assets/images/CamilaV.png" alt="María Camila Velásquez">
-          </div>
+          <div class="avatar"><img src="assets/images/CamilaV.png" alt="María Camila Velásquez"></div>
           <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
-            </div>
             <h4>María Camila Velásquez</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
 
-        <!-- Sebastián Parra -->
         <div class="author">
-          <div class="avatar" aria-hidden="true">
-            <img src="assets/images/Sebastianp.png" alt="Sebastián Parra">
-          </div>
+          <div class="avatar"><img src="assets/images/Sebastianp.png" alt="Sebastián Parra"></div>
           <div>
-            <div style="display:flex; align-items:center; gap:8px;">
-              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
-            </div>
             <h4>Sebastián Parra</h4>
-            <div class="role">Estudiante</div>
-            <p>Docente en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
+            <div class="role">Docente en formación</div>
+            <p>Docentes en formación de la Licenciatura en Bilinguismo de la Universidad El Bosque</p>
           </div>
         </div>
       </section>
 
-      <section class="lessons" aria-labelledby="leccionesTitle">
+      <!-- Lessons -->
+      <section class="lessons card" aria-labelledby="leccionesTitle">
         <h3 id="leccionesTitle" style="margin:0 0 12px 0;">Contenido del curso</h3>
-
         <div id="lessonsList">
-          <div class="lesson" data-index="1">
-            <div class="lesson-number">1</div>
-            <div style="flex:1">
-              <div class="lesson-title">Certificación Internacional en Segunda Lengua</div>
-              <div class="lesson-desc">Introducción a los procesos de certificación y requisitos más comunes en exámenes internacionales.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="1"><div class="lesson-number">1</div><div style="flex:1"><div class="lesson-title">Certificación Internacional en Segunda Lengua</div><div class="lesson-desc">Introducción a los procesos de certificación y requisitos más comunes en exámenes internacionales.</div></div><div class="chev">▾</div></div>
 
-          <div class="lesson" data-index="2">
-            <div class="lesson-number">2</div>
-            <div style="flex:1">
-              <div class="lesson-title">Interacción oral en un examen internacional</div>
-              <div class="lesson-desc">Estrategias para la comunicación oral, manejo de turnos y rúbricas de evaluación.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="2"><div class="lesson-number">2</div><div style="flex:1"><div class="lesson-title">Interacción oral en un examen internacional</div><div class="lesson-desc">Estrategias para la comunicación oral, manejo de turnos y rúbricas de evaluación.</div></div><div class="chev">▾</div></div>
 
-          <div class="lesson" data-index="3">
-            <div class="lesson-number">3</div>
-            <div style="flex:1">
-              <div class="lesson-title">Escritura en un examen internacional</div>
-              <div class="lesson-desc">Técnicas para redactar ensayos y respuestas escritas con coherencia y cohesión.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="3"><div class="lesson-number">3</div><div style="flex:1"><div class="lesson-title">Escritura en un examen internacional</div><div class="lesson-desc">Técnicas para redactar ensayos y respuestas escritas con coherencia y cohesión.</div></div><div class="chev">▾</div></div>
 
-          <div class="lesson" data-index="4">
-            <div class="lesson-number">4</div>
-            <div style="flex:1">
-              <div class="lesson-title">Comprensión lectora</div>
-              <div class="lesson-desc">Estrategias para identificar ideas principales, inferencias y vocabulario en contexto.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="4"><div class="lesson-number">4</div><div style="flex:1"><div class="lesson-title">Comprensión lectora</div><div class="lesson-desc">Estrategias para identificar ideas principales, inferencias y vocabulario en contexto.</div></div><div class="chev">▾</div></div>
 
-          <div class="lesson" data-index="5">
-            <div class="lesson-number">5</div>
-            <div style="flex:1">
-              <div class="lesson-title">Comprensión auditiva</div>
-              <div class="lesson-desc">Cómo abordar tareas de escucha y consejos para mejorar la comprensión en situaciones reales.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="5"><div class="lesson-number">5</div><div style="flex:1"><div class="lesson-title">Comprensión auditiva</div><div class="lesson-desc">Cómo abordar tareas de escucha y consejos para mejorar la comprensión en situaciones reales.</div></div><div class="chev">▾</div></div>
 
-          <div class="lesson" data-index="6">
-            <div class="lesson-number">6</div>
-            <div style="flex:1">
-              <div class="lesson-title">Vocabulario y gramática en contexto</div>
-              <div class="lesson-desc">Actividades para consolidar estructuras gramaticales y léxico relevante para exámenes.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="6"><div class="lesson-number">6</div><div style="flex:1"><div class="lesson-title">Vocabulario y gramática en contexto</div><div class="lesson-desc">Actividades para consolidar estructuras gramaticales y léxico relevante para exámenes.</div></div><div class="chev">▾</div></div>
 
-          <div class="lesson" data-index="7">
-            <div class="lesson-number">7</div>
-            <div style="flex:1">
-              <div class="lesson-title">Simulacros y prácticas</div>
-              <div class="lesson-desc">Preparación de simulacros tipo examen y retroalimentación para mejorar el desempeño.</div>
-            </div>
-            <div class="chev">▾</div>
-          </div>
+          <div class="lesson" data-index="7"><div class="lesson-number">7</div><div style="flex:1"><div class="lesson-title">Simulacros y prácticas</div><div class="lesson-desc">Preparación de simulacros tipo examen y retroalimentación para mejorar el desempeño.</div></div><div class="chev">▾</div></div>
         </div>
       </section>
 
-      <!-- NEW: Testimonios -->
+      <!-- Testimonials -->
       <section class="testimonials" aria-labelledby="testimoniosTitle">
         <h3 id="testimoniosTitle" style="grid-column:1/-1; margin:0 0 6px 0;">Testimonios</h3>
 
         <div class="testimonial">
-          <video controls preload="metadata" src="assets/videos/Testimonio1.mp4"></video>
+          <video controls preload="metadata" src="assets/videos/Testimonio1.mp4" aria-label="Testimonio 1"></video>
           <div class="t-caption"><strong>Testimonio 1</strong><br><small class="t-muted">Alumno del MOOC</small></div>
         </div>
 
         <div class="testimonial">
-          <video controls preload="metadata" src="assets/videos/Testimonio2.mp4"></video>
+          <video controls preload="metadata" src="assets/videos/Testimonio2.mp4" aria-label="Testimonio 2"></video>
           <div class="t-caption"><strong>Testimonio 2</strong><br><small class="t-muted">Estudiante participante</small></div>
         </div>
 
         <div class="testimonial">
-          <video controls preload="metadata" src="assets/videos/Testimonio3.mp4"></video>
+          <video controls preload="metadata" src="assets/videos/Testimonio3.mp4" aria-label="Testimonio 3"></video>
           <div class="t-caption"><strong>Testimonio 3</strong><br><small class="t-muted">Graduado del curso</small></div>
         </div>
+
       </section>
 
     </div>
@@ -424,41 +309,22 @@
     <aside class="right-column">
       <div class="card" aria-labelledby="objetivosTitle">
         <h3 id="objetivosTitle">Objetivos del curso</h3>
+        <div class="objective"><strong>Fortalecer competencias lingüísticas</strong><div style="margin-top:6px; color:var(--muted);">Desarrollar habilidades comunicativas en inglés (lectura, escucha, escritura y expresión oral) a partir de prácticas adaptadas al formato del Benchmark Exam de Pearson.</div></div>
 
-        <div class="objective">
-          <strong>Fortalecer competencias lingüísticas</strong>
-          <div style="margin-top:6px; color:var(--muted); font-size:14px;">
-            Desarrollar habilidades comunicativas en inglés (lectura, escucha, escritura y expresión oral) a partir de prácticas adaptadas al formato del Benchmark Exam de Pearson.
-          </div>
-        </div>
+        <div class="objective"><strong>Aplicar estrategias efectivas</strong><div style="margin-top:6px; color:var(--muted);">Aprender técnicas para gestionar el tiempo, responder de forma precisa y afrontar cada sección del examen con seguridad y dominio.</div></div>
 
-        <div class="objective">
-          <strong>Aplicar estrategias efectivas</strong>
-          <div style="margin-top:6px; color:var(--muted); font-size:14px;">
-            Aprender técnicas para gestionar el tiempo, responder de forma precisa y afrontar cada sección del examen con seguridad y dominio.
-          </div>
-        </div>
-
-        <div class="objective">
-          <strong>Promover la autorregulación y confianza</strong>
-          <div style="margin-top:6px; color:var(--muted); font-size:14px;">
-            Fomentar el control emocional, la autoconfianza y la preparación consciente como factores clave para alcanzar el nivel C1 en el Benchmark Exam.
-          </div>
-        </div>
-
+        <div class="objective"><strong>Promover la autorregulación y confianza</strong><div style="margin-top:6px; color:var(--muted);">Fomentar el control emocional, la autoconfianza y la preparación consciente como factores clave para alcanzar el nivel C1 en el Benchmark Exam.</div></div>
       </div>
     </aside>
   </main>
 
-  <!-- Modal / video dialog -->
+  <!-- Intro modal -->
   <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modalTitle">
     <div class="dialog" role="document">
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
         <strong id="modalTitle">Introducción</strong>
         <button id="closeModal" class="close" aria-label="Cerrar">✕</button>
       </div>
-
-      <!-- Video element: src set from JS -->
       <video id="introVideo" controls preload="metadata">
         <source id="videoSource" src="" type="video/mp4">
         Tu navegador no soporta la reproducción de video.
@@ -467,13 +333,14 @@
   </div>
 
   <script>
-    /* === CONFIG: cambia VIDEO_URL por la URL pública (raw) de tu archivo en GitHub si lo prefieres ===
-       Ejemplo raw URL: https://raw.githubusercontent.com/sebastianparramoreno66-source/Benchmark-TAC-Practice/main/MOOC%20BENCHMARK%20EXAM.mp4
-       Para testimonios la página usa rutas relativas: assets/videos/Testimonio1.mp4 etc.
-    */
-    const VIDEO_URL = "https://raw.githubusercontent.com/sebastianparramoreno66-source/Benchmark-TAC-Practice/main/MOOC%20BENCHMARK%20EXAM.mp4";
+    // ===== CONFIG: ajusta la ruta del video de introducción si hace falta =====
+    // Si tu archivo se llama exactamente "MOOC BENCHMARK EXAM.mp4" en assets/videos usa:
+    // const VIDEO_URL = "assets/videos/MOOC%20BENCHMARK%20EXAM.mp4";
+    // Si lo renombraste a mooc-benchmark-exam.mp4 (recomendado sin espacios) usa:
+    // const VIDEO_URL = "assets/videos/mooc-benchmark-exam.mp4";
+    const VIDEO_URL = "assets/videos/MOOC%20BENCHMARK%20EXAM.mp4";
 
-    // Modal open/close for intro video
+    // Modal open/close logic (intro video)
     const modal = document.getElementById('modal');
     const openIntro = document.getElementById('openIntro');
     const closeModal = document.getElementById('closeModal');
@@ -481,15 +348,14 @@
     const videoSource = document.getElementById('videoSource');
 
     openIntro.addEventListener('click', () => {
+      // set video src and open modal
       videoSource.src = VIDEO_URL;
       introVideo.load();
       modal.classList.add('open');
       modal.setAttribute('aria-hidden','false');
-      introVideo.play().catch(()=>{ /* autoplay blocked */ });
+      // attempt play (may be blocked)
+      introVideo.play().catch(()=>{/* autoplay blocked; user can press play */});
     });
-
-    closeModal.addEventListener('click', closeVideo);
-    modal.addEventListener('click', (e) => { if(e.target === modal) closeVideo(); });
 
     function closeVideo(){
       introVideo.pause();
@@ -500,7 +366,11 @@
       modal.setAttribute('aria-hidden','true');
     }
 
-    // Lessons accordion
+    closeModal.addEventListener('click', closeVideo);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeVideo(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('open')) closeVideo(); });
+
+    // Lessons accordion behavior
     document.querySelectorAll('.lesson').forEach(item=>{
       item.addEventListener('click', ()=>{
         const isExpanded = item.classList.contains('expanded');
@@ -512,13 +382,18 @@
       });
     });
 
-    // Esc to close modal
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape' && modal.classList.contains('open')) closeVideo();
+    // Helpful check: log when testimonial videos have different orientation (optional)
+    // This does not change styling; it's only debug info:
+    document.querySelectorAll('.testimonial video').forEach(v=>{
+      v.addEventListener('loadedmetadata', ()=> {
+        // width/height show natural orientation
+        // console.log('Testimonial size', v.currentSrc, v.videoWidth, v.videoHeight);
+      });
     });
   </script>
 </body>
 </html>
+
 
 
 
