@@ -1,102 +1,473 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Benchmark Master – Universidad El Bosque</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {
-      background: #f5f5f5;
-      margin: 0;
-      font-family: Arial, sans-serif;
+    :root{
+      --bg:#0d1114;
+      --panel:#0f1720;
+      --muted:#98a0a6;
+      --card:#191d22;
+      --green:#00723f; /* color universidad */
+      --white:#eef2f3;
+      --accent:#0f3b2a;
+      --radius:12px;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
-    .header {
-      background: #00723f;
-      color: #fff;
-      padding: 24px 0 12px 0;
-      text-align: center;
-      font-size: 2em;
-      font-weight: bold;
-      position: relative;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#071018 0%, #0d1114 100%);
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
     }
-    .invite {
-      position: absolute;
-      right: 24px;
-      top: 18px;
-      font-size: 1em;
-      font-weight: normal;
+
+    /* Header / Hero */
+    .header{
+      padding:18px 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background: linear-gradient(90deg,var(--panel), rgba(0,0,0,0));
+      border-bottom:1px solid rgba(255,255,255,0.02);
     }
-    .container {
-      background: #fff;
-      margin: 32px auto;
-      max-width: 700px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      padding: 36px 40px 32px 40px;
+    .brand{
+      font-weight:700;
+      letter-spacing:0.2px;
+      font-size:18px;
     }
-    h2 {
-      margin-top: 0;
-      font-size: 1.4em;
-      font-weight: bold;
+    .invite{ color:var(--muted); font-size:14px; }
+
+    .hero{
+      display:flex;
+      gap:40px;
+      align-items:center;
+      padding:64px 6%;
+      min-height:320px;
+      background-image: linear-gradient(0deg, rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(''); /* optional background image */
+      background-size:cover;
+      background-position:center;
     }
-    .button {
-      margin-top: 16px;
-      background: #00723f;
-      color: #fff;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-size: 1em;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
+    .hero-left{
+      flex:1 1 600px;
+      max-width:900px;
     }
-    .small {
-      color: #555;
-      font-size: 0.95em;
-      margin-top: 6px;
+    .badges{ display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; }
+    .badge{
+      background:rgba(255,255,255,0.03);
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
-    ul {
-      margin-top: 6px;
-      margin-bottom: 0;
+    h1{ margin:0 0 12px 0; font-size:36px; letter-spacing:0.2px; }
+    .lead{ color:var(--muted); max-width:760px; margin-bottom:22px; }
+
+    .hero-actions{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .btn{
+      padding:12px 22px;
+      border-radius:999px;
+      border:2px solid transparent;
+      cursor:pointer;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:var(--white);
+      background:var(--green);
+      transition:transform .12s ease, box-shadow .12s;
+      box-shadow:0 6px 18px rgba(0,0,0,0.4);
     }
-    .video-container {
-      margin-top: 32px;
-      text-align: center;
+    .btn.outline{
+      background:transparent;
+      border:2px solid rgba(255,255,255,0.12);
+      color:var(--white);
     }
-    .video-container video {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      border-radius: 8px;
-      background: #000;
+    .btn:active{ transform:translateY(1px); }
+
+    /* Main content two columns */
+    .content{
+      display:flex;
+      gap:32px;
+      padding:40px 6%;
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .left-column{ flex:1 1 640px; min-width:300px; }
+    .right-column{ width:320px; max-width:40%; min-width:260px; }
+
+    /* Authors */
+    .authors{
+      background:rgba(255,255,255,0.02);
+      padding:22px;
+      border-radius:var(--radius);
+      margin-bottom:20px;
+    }
+    .author{
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+      padding:12px 0;
+      border-bottom:1px dashed rgba(255,255,255,0.03);
+    }
+    .author:last-child{ border-bottom:0; padding-bottom:0; }
+    .avatar{
+      width:72px;height:72px;border-radius:50%;
+      flex-shrink:0;
+      background-size:cover;
+      background-position:center;
+      border:3px solid rgba(255,255,255,0.04);
+    }
+    .author h4{ margin:0; font-size:16px; }
+    .author .role{ color:var(--muted); font-size:13px; margin-bottom:6px; }
+    .author p{ margin:0; color:var(--muted); font-size:14px; }
+
+    /* Objectives card */
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:18px;
+      border-radius:12px;
+    }
+    .card h3{ margin:0 0 12px 0; font-size:18px; }
+    .objective{ padding:12px; background:rgba(0,0,0,0.2); border-radius:8px; margin-bottom:10px; color:var(--muted); }
+    .objective:last-child{ margin-bottom:0; }
+
+    /* Lessons accordion */
+    .lessons{
+      margin-top:22px;
+      background:rgba(255,255,255,0.02);
+      padding:18px;
+      border-radius:var(--radius);
+    }
+    .lesson{
+      border-left:4px solid transparent;
+      padding:14px 16px;
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      cursor:pointer;
+      transition:background .12s;
+      border-radius:8px;
+      margin-bottom:10px;
+    }
+    .lesson:hover{ background:rgba(255,255,255,0.01); }
+    .lesson-number{
+      min-width:36px; font-weight:700; color:var(--muted); opacity:0.9;
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px;
+    }
+    .lesson-title{ font-weight:700; font-size:15px; color:var(--white); }
+    .lesson-desc{ color:var(--muted); font-size:13px; margin-top:6px; }
+
+    .lesson.expanded{ background:linear-gradient(90deg, rgba(0,0,0,0.25), rgba(0,0,0,0.12)); border-left-color:var(--green); }
+    .lesson .chev{ margin-left:auto; color:var(--muted); }
+
+    /* modal */
+    .modal{
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+      background:rgba(0,0,0,0.7); z-index:999; padding:20px; visibility:hidden; opacity:0; transition:opacity .18s ease, visibility .18s;
+    }
+    .modal.open{ visibility:visible; opacity:1; }
+    .modal .dialog{
+      width:100%; max-width:900px; background:var(--card); border-radius:12px; padding:12px;
+    }
+    .modal .close{
+      background:transparent;border:0;color:var(--muted); font-weight:700; font-size:18px; cursor:pointer;
+      padding:8px 12px;
+    }
+    video{
+      width:100%; height:auto; border-radius:8px; background:#000;
+      display:block;
+    }
+
+    /* responsive */
+    @media (max-width:900px){
+      .hero{ padding:40px 4%; min-height:220px; }
+      h1{ font-size:28px; }
+      .content{ padding:20px 4%; }
+      .right-column{ width:100%; order:3; }
+      .left-column{ order:2; }
+      .authors{ margin-bottom:16px; }
+    }
+    @media (max-width:640px){
+      .header{ padding:12px; }
+      .brand{ font-size:15px; }
+      .hero{ padding:28px 3%; gap:18px; }
+      .badge{ font-size:12px; padding:6px 8px; }
+      .btn{ padding:10px 16px; font-size:14px; }
     }
   </style>
 </head>
 <body>
-  <div class="header">
-    Benchmark Master – Universidad El Bosque
-    <span class="invite">Invitado</span>
-  </div>
-  <div class="container">
-    <h2>Bienvenido al MOOC de preparación para el Benchmark Exam de Pearson</h2>
-    <p>
-      Este curso en línea ha sido diseñado por la <b>Universidad El Bosque</b> para apoyar a los estudiantes en la preparación del examen internacional <i>Benchmark Exam</i> de Pearson.
-    </p>
-    <b>Objetivos:</b>
-    <ul>
-      <li>Familiarizarte con el formato y las secciones del examen Benchmark de Pearson.</li>
-      <li>Desarrollar estrategias efectivas para cada habilidad lingüística.</li>
-      <li>Evaluar tu nivel de inglés mediante simulacros y ejercicios prácticos.</li>
-    </ul>
-    <a class="button" href="https://view.genially.com/690428e18e8921ab6fc039c0/interactive-content-benchmark-master" target="_blank">Entrar al curso</a>
-    <div class="small">(El curso se abrirá en una nueva pestaña)</div>
-    <div class="video-container">
-      <video controls>
-        <source src="MOOC BENCHMARK EXAM.mp4" type="video/mp4">
-        Tu navegador no soporta el elemento de video.
+  <header class="header">
+    <div class="brand">Benchmark Master – Universidad El Bosque</div>
+    <div class="invite">Invitado</div>
+  </header>
+
+  <section class="hero" aria-label="Hero">
+    <div class="hero-left">
+      <div class="badges">
+        <div class="badge">⏱ 48 horas</div>
+        <div class="badge">📚 7 lecciones</div>
+        <div class="badge">🎓 Certificado cursado</div>
+      </div>
+      <h1>Exámenes Internacionales de Lengua</h1>
+      <p class="lead">El MOOC Exámenes Internacionales de Lengua brinda información sobre la importancia de la preparación y presentación de un examen internacional en una segunda lengua. Encontrarás contenidos en inglés y materiales en español para practicar.</p>
+
+      <div class="hero-actions">
+        <button id="openIntro" class="btn outline" aria-haspopup="dialog" title="Ver introducción">
+          ▶ VER INTRODUCCIÓN
+        </button>
+
+        <a class="btn" href="https://view.genially.com/690428e18e8921ab6fc039c0/interactive-content-benchmark-master" target="_blank" rel="noopener noreferrer">
+          ENTRAR AL CURSO
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <main class="content">
+    <div class="left-column">
+      <section class="authors" aria-labelledby="autoresTitle">
+        <h3 id="autoresTitle" style="margin:0 0 12px 0;">Autores</h3>
+
+        <div class="author">
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=32')" aria-hidden="true"></div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
+            </div>
+            <h4>Lucero López Martínez</h4>
+            <div class="role">Magíster en Educación</div>
+            <p>Docente de Inglés en la Fundación Universitaria del Área Andina. Especialista en evaluación de exámenes internacionales y diseñadora de materiales didácticos.</p>
+          </div>
+        </div>
+
+        <div class="author">
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=47')" aria-hidden="true"></div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
+            </div>
+            <h4>Wilson Enrique Rodríguez Paredes</h4>
+            <div class="role">Magíster en Educación</div>
+            <p>Evaluador de exámenes internacionales. Investigador en prácticas evaluativas y formación docente en lenguas.</p>
+          </div>
+        </div>
+
+        <div class="author">
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=5')" aria-hidden="true"></div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
+            </div>
+            <h4>Ana María Gutiérrez</h4>
+            <div class="role">Especialista en evaluación</div>
+            <p>Diseñadora de recursos para la comprensión lectora y comunicación oral, con experiencia universitaria.</p>
+          </div>
+        </div>
+
+        <div class="author">
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=12')" aria-hidden="true"></div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
+            </div>
+            <h4>Jorge Morales</h4>
+            <div class="role">Profesor y tutor</div>
+            <p>Experto en estrategias de producción escrita y retroalimentación formativa para certificaciones internacionales.</p>
+          </div>
+        </div>
+
+        <div class="author">
+          <div class="avatar" style="background-image:url('https://i.pravatar.cc/120?img=20')" aria-hidden="true"></div>
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="background:var(--green); color:#fff; padding:4px 8px; font-weight:700; border-radius:999px; font-size:12px;">Autor</span>
+            </div>
+            <h4>Mariana Torres</h4>
+            <div class="role">Coordinadora académica</div>
+            <p>Responsable de diseño curricular y evaluación por competencias para cursos en linea y certificaciones.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="lessons" aria-labelledby="leccionesTitle">
+        <h3 id="leccionesTitle" style="margin:0 0 12px 0;">Contenido del curso</h3>
+
+        <div id="lessonsList">
+          <div class="lesson" data-index="1">
+            <div class="lesson-number">1</div>
+            <div style="flex:1">
+              <div class="lesson-title">Certificación Internacional en Segunda Lengua</div>
+              <div class="lesson-desc">Introducción a los procesos de certificación y requisitos más comunes en exámenes internacionales.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+
+          <div class="lesson" data-index="2">
+            <div class="lesson-number">2</div>
+            <div style="flex:1">
+              <div class="lesson-title">Interacción oral en un examen internacional</div>
+              <div class="lesson-desc">Estrategias para la comunicación oral, manejo de turnos y rúbricas de evaluación.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+
+          <div class="lesson" data-index="3">
+            <div class="lesson-number">3</div>
+            <div style="flex:1">
+              <div class="lesson-title">Escritura en un examen internacional</div>
+              <div class="lesson-desc">Técnicas para redactar ensayos y respuestas escritas con coherencia y cohesión.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+
+          <div class="lesson" data-index="4">
+            <div class="lesson-number">4</div>
+            <div style="flex:1">
+              <div class="lesson-title">Comprensión lectora</div>
+              <div class="lesson-desc">Estrategias para identificar ideas principales, inferencias y vocabulario en contexto.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+
+          <div class="lesson" data-index="5">
+            <div class="lesson-number">5</div>
+            <div style="flex:1">
+              <div class="lesson-title">Comprensión auditiva</div>
+              <div class="lesson-desc">Cómo abordar tareas de escucha y consejos para mejorar la comprensión en situaciones reales.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+
+          <div class="lesson" data-index="6">
+            <div class="lesson-number">6</div>
+            <div style="flex:1">
+              <div class="lesson-title">Vocabulario y gramática en contexto</div>
+              <div class="lesson-desc">Actividades para consolidar estructuras gramaticales y léxico relevante para exámenes.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+
+          <div class="lesson" data-index="7">
+            <div class="lesson-number">7</div>
+            <div style="flex:1">
+              <div class="lesson-title">Simulacros y prácticas</div>
+              <div class="lesson-desc">Preparación de simulacros tipo examen y retroalimentación para mejorar el desempeño.</div>
+            </div>
+            <div class="chev">▾</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="right-column">
+      <div class="card" aria-labelledby="objetivosTitle">
+        <h3 id="objetivosTitle">Objetivos del curso</h3>
+        <div class="objective">
+          <strong>Reconocer</strong>
+          <div style="margin-top:6px; color:var(--muted); font-size:14px;">
+            Reconocer la importancia de contar con un examen internacional en una segunda lengua y sus características.
+          </div>
+        </div>
+        <div class="objective">
+          <strong>Comprender</strong>
+          <div style="margin-top:6px; color:var(--muted); font-size:14px;">
+            Comprender estrategias para cada sección del examen y cómo prepararse efectivamente.
+          </div>
+        </div>
+        <div class="objective">
+          <strong>Proponer</strong>
+          <div style="margin-top:6px; color:var(--muted); font-size:14px;">
+            Proponer un plan de estudio personalizado y aplicar estrategias en simulacros.
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal / video dialog -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modalTitle">
+    <div class="dialog" role="document">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+        <strong id="modalTitle">Introducción</strong>
+        <button id="closeModal" class="close" aria-label="Cerrar">✕</button>
+      </div>
+
+      <!-- Video element: src set from JS -->
+      <video id="introVideo" controls preload="metadata">
+        <source id="videoSource" src="" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
       </video>
     </div>
   </div>
+
+  <script>
+    /* === CONFIG: cambia VIDEO_URL por la URL pública (raw) de tu archivo en GitHub ===
+       Ejemplo: https://raw.githubusercontent.com/TU_USUARIO/TU_REPO/main/MOOC%20BENCHMARK%20EXAM.mp4
+       Si tu archivo tiene espacios, codifícalos como %20 o renómbralo sin espacios.
+    */
+    const VIDEO_URL = "https://raw.githubusercontent.com/sebastianparramoreno66-source/Benchmark-TAC-Practice/main/MOOC%20BENCHMARK%20EXAM.mp4";
+
+    // Modal open/close
+    const modal = document.getElementById('modal');
+    const openIntro = document.getElementById('openIntro');
+    const closeModal = document.getElementById('closeModal');
+    const introVideo = document.getElementById('introVideo');
+    const videoSource = document.getElementById('videoSource');
+
+    openIntro.addEventListener('click', () => {
+      // set video src
+      videoSource.src = VIDEO_URL;
+      introVideo.load();
+      // show modal
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      // try to play (autoplay may be blocked by browser; user can press play)
+      introVideo.play().catch(()=>{ /* autoplay blocked: user interacts */ });
+    });
+
+    closeModal.addEventListener('click', closeVideo);
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) closeVideo();
+    });
+
+    function closeVideo(){
+      introVideo.pause();
+      introVideo.currentTime = 0;
+      videoSource.src = "";
+      introVideo.load();
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    // Lessons accordion
+    document.querySelectorAll('.lesson').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        const isExpanded = item.classList.contains('expanded');
+        // close all
+        document.querySelectorAll('.lesson').forEach(l => l.classList.remove('expanded'));
+        if(!isExpanded){
+          item.classList.add('expanded');
+          // optionally scroll into view
+          item.scrollIntoView({behavior:'smooth', block:'nearest'});
+        }
+      });
+    });
+
+    // Accessibility: Esc to close modal
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeVideo();
+    });
+  </script>
 </body>
 </html>
